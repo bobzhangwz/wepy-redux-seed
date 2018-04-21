@@ -1,6 +1,6 @@
 import wepy from 'wepy'
-import { createActions } from 'redux-actions'
-import { PENDING, FULFILLED, REJECTED } from 'redux-promise-middleware'
+import {createActions} from 'redux-actions'
+import {PENDING, FULFILLED, REJECTED} from 'redux-promise-middleware'
 import typeToReducer from 'type-to-reducer'
 
 const initialState = {
@@ -9,24 +9,24 @@ const initialState = {
   loading: false
 }
 
-export const { getUserInfo } = createActions({
-  "GET_USER_INFO": wepy.getUserInfo
+export const {getUserInfo} = createActions({
+  GET_USER_INFO: wepy.getUserInfo
 })
 
 export default typeToReducer({
   [getUserInfo]: {
-    PENDING: (state, action) => {
+    [PENDING]: (state, action) => {
       return ({
         ...state,
         loading: true
       })
     },
-    REJECTED: (state, action) => ({
+    [REJECTED]: (state, action) => ({
       ...state,
       loading: false,
       error: action.payload
     }),
-    FULFILLED: (state, action) => ({
+    [FULFILLED]: (state, action) => ({
       ...state,
       loading: false,
       userInfo: action.payload.userInfo

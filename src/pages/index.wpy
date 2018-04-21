@@ -1,21 +1,21 @@
 <style lang="scss">
-@import 'zanui/btn.scss';
+  @import 'zanui/btn.scss';
 
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-.userinfo-avatar {
-  width: 80rpx;
-  height: 80rpx;
-  border-radius: 50%;
-}
+  .userinfo-avatar {
+    width: 80 rpx;
+    height: 80 rpx;
+    border-radius: 50%;
+  }
 
-.userinfo-nickname {
-  color: #aaa;
-}
+  .userinfo-nickname {
+    color: #aaa;
+  }
 </style>
 <template>
   <view class="container">
@@ -28,33 +28,33 @@
 </template>
 
 <script>
-import wepy from 'wepy'
-import { connect, getStore } from 'wepy-redux'
-import { getUserInfo } from '../app_redux'
+  import wepy from 'wepy'
+  import {connect, getStore} from 'wepy-redux'
+  import {getUserInfo} from '../app_redux'
 
-@connect({
-  userInfo(state) {
-    return state.app.userInfo
+  @connect({
+    userInfo(state) {
+      return state.app.userInfo
+    }
+  }, {
+    getUserInfo
+  })
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: 'Hello world'
+    };
+    components = {};
+
+    mixins = [];
+
+    computed = {};
+
+    methods = {};
+
+    events = {};
+
+    onLoad() {
+      getStore().dispatch(getUserInfo())
+    }
   }
-}, {
-  getUserInfo
-})
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: 'Hello world'
-  };
-  components = {};
-
-  mixins = [];
-
-  computed = {};
-
-  methods = {};
-
-  events = {};
-
-  onLoad() {
-    getStore().dispatch(getUserInfo())
-  }
-}
 </script>
