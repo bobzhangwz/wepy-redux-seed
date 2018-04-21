@@ -1,0 +1,60 @@
+<style lang="scss">
+@import 'zanui/btn.scss';
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+</style>
+<template>
+  <view class="container">
+    <view class="userinfo" @tap="getUserInfo">
+      <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
+      <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
+    </view>
+    <button class="zan-btn zan-btn--primary">Hello Wepy</button>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import { connect, getStore } from 'wepy-redux'
+import { getUserInfo } from '../app_redux'
+
+@connect({
+  userInfo(state) {
+    return state.app.userInfo
+  }
+}, {
+  getUserInfo
+})
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: 'Hello world'
+  };
+  components = {};
+
+  mixins = [];
+
+  computed = {};
+
+  methods = {};
+
+  events = {};
+
+  onLoad() {
+    getStore().dispatch(getUserInfo())
+  }
+}
+</script>
